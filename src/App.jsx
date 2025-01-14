@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Zap, Heart } from 'lucide-react';
-import JV from '@/assets/jv.png';
+import JV from '@/assets/JV.png';
 
 export default function LandingPage() {
   return (
