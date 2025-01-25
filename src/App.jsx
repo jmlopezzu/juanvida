@@ -15,6 +15,7 @@ import aliado1 from '@/assets/aliado1.png';
 import aliado2 from '@/assets/aliado2.png';
 import aliado3 from '@/assets/aliado3.png';
 import aliado4 from '@/assets/aliado4.png';
+import { FaFire, FaWater, FaWind, FaLeaf } from "react-icons/fa";
 
 export default function App() {
   const blogPosts = [
@@ -80,21 +81,73 @@ export default function App() {
 
       {/* Sección de los 4 Elementos */}
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Los 4 Elementos</h2>
-          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-            {[
-              { icon: '🔥', title: 'Fuego', desc: 'Conecta con tu energía interior.' },
-              { icon: '💧', title: 'Agua', desc: 'Fluye con calma y armonía.' },
-              { icon: '🌬️', title: 'Aire', desc: 'Respira y libérate de tensiones.' },
-              { icon: '🌍', title: 'Tierra', desc: 'Encuentra estabilidad y equilibrio.' },
-            ].map((element, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <div className="bg-green-600 text-white text-4xl p-4 rounded-full">{element.icon}</div>
-                <h3 className="mt-4 text-xl font-bold">{element.title}</h3>
-                <p className="text-gray-700">{element.desc}</p>
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Los 4 Elementos</h2>
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+          {[
+            { icon: <FaFire />, title: 'Fuego', desc: 'Conecta con tu energía interior.' },
+            { icon: <FaWater />, title: 'Agua', desc: 'Fluye con calma y armonía.' },
+            { icon: <FaWind />, title: 'Aire', desc: 'Respira y libérate de tensiones.' },
+            { icon: <FaLeaf />, title: 'Tierra', desc: 'Encuentra estabilidad y equilibrio.' },
+          ].map((element, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="bg-green-600 text-white text-4xl p-4 rounded-full">
+                {element.icon}
               </div>
-            ))}
+              <h3 className="mt-4 text-xl font-bold">{element.title}</h3>
+              <p className="text-gray-700">{element.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+      {/* Ishka Kankueb Yoga Section */}
+      <section className="py-20 bg-gradient-to-r text-black">
+        <div className="container mx-auto px-4 lg:flex lg:items-center">
+          {/* Text Content */}
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold mb-8">Exploramos Ishka Kankueb Yoga</h2>
+            <p className="text-lg mb-6">
+              En Juan Vida nos sumergimos en el arte de <span className="text-green-300 font-bold">Ishka Kankueb Yoga</span>,
+              una práctica única que equilibra cuerpo, mente y espíritu a través de movimientos fluidos y conscientes.
+              Diseñamos experiencias personalizadas para transformar tu bienestar integral.
+            </p>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
+              {[
+                {
+                  title: 'Conexión Interior',
+                  desc: 'Fomentamos la conexión profunda con tu ser a través de técnicas de respiración y meditación.'
+                },
+                {
+                  title: 'Movimientos Armónicos',
+                  desc: 'Integramos posturas y secuencias que promueven flexibilidad y fuerza en equilibrio.'
+                },
+                {
+                  title: 'Entorno Natural',
+                  desc: 'Disfruta de prácticas en espacios naturales diseñados para potenciar la serenidad y la paz.'
+                },
+              ].map((feature, index) => (
+                <div key={index} className="p-6 bg-black bg-opacity-70 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
+                  <p className="text-white">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Image Section */}
+          <div className="lg:w-1/2 mt-12 lg:mt-0 lg:pl-12 relative">
+            <img
+              src="iky.jpg" // Reemplaza con la ruta real de la imagen principal
+              alt="Ishka Kankueb Yoga"
+              className="rounded-lg shadow-xl h-130 w-full"
+            />
+            <img
+              src="JV.png" // Reemplaza con la ruta real de la imagen secundaria (pequeña)
+              alt="Ishka Yoga Logo"
+              className="absolute bottom-4 right-4 w-20 h-20 rounded-full border-4 border-white shadow-lg"
+            />
           </div>
         </div>
       </section>
@@ -113,14 +166,33 @@ export default function App() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Nuestro Blog</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {blogPosts.map((post, index) => (
+              <div key={index} className="relative shadow-md rounded-lg overflow-hidden">
+                <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                  <Link to={post.link} className="text-yellow-400 text-lg font-bold">
+                    Leer Más
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Beneficios Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Beneficios de Practicar Yoga</h2>
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
             {[{ icon: '🧘‍♀️', title: 'Reducción del Estrés', desc: 'Calma tu mente y cuerpo a través de la meditación guiada.' },
-              { icon: '💖', title: 'Bienestar Físico', desc: 'Fortalece tu cuerpo con posturas suaves y desafiantes.' },
-              { icon: '🌿', title: 'Armonía Interior', desc: 'Conecta con tu esencia a través del yoga holístico.' }].map((feature, index) => (
+            { icon: '💖', title: 'Bienestar Físico', desc: 'Fortalece tu cuerpo con posturas suaves y desafiantes.' },
+            { icon: '🌿', title: 'Armonía Interior', desc: 'Conecta con tu esencia a través del yoga holístico.' }].map((feature, index) => (
               <div key={index} className="flex flex-col items-center text-center">
                 <div className="bg-green-600 text-white text-4xl p-4 rounded-full">{feature.icon}</div>
                 <h3 className="mt-4 text-xl font-bold">{feature.title}</h3>
@@ -145,25 +217,6 @@ export default function App() {
                 />
                 <p className="mt-4 italic text-gray-700">"{testimonial.text}"</p>
                 <p className="mt-4 font-bold text-green-900">- {testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Nuestro Blog</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {blogPosts.map((post, index) => (
-              <div key={index} className="relative shadow-md rounded-lg overflow-hidden">
-                <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <Link to={post.link} className="text-yellow-400 text-lg font-bold">
-                    Leer Más
-                  </Link>
-                </div>
               </div>
             ))}
           </div>
