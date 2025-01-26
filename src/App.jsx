@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import JV from '@/assets/JV.png';
@@ -22,19 +23,60 @@ export default function App() {
     { image: blog1, title: 'Los 5 beneficios del yoga en tu día a día', link: '#' },
     { image: blog2, title: 'Cómo empezar una práctica diaria de yoga', link: '#' },
     { image: blog3, title: 'Técnicas de meditación para principiantes', link: '#' },
-    { image: blog4, title: 'Respiración consciente: mejora tu vida', link: '#' },
-    { image: blog5, title: 'Posturas básicas para principiantes', link: '#' },
-    { image: blog6, title: 'Cómo el yoga fortalece tu cuerpo y mente', link: '#' },
+    // { image: blog4, title: 'Respiración consciente: mejora tu vida', link: '#' },
+    // { image: blog5, title: 'Posturas básicas para principiantes', link: '#' },
+    // { image: blog6, title: 'Cómo el yoga fortalece tu cuerpo y mente', link: '#' },
+  ];
+
+  const beneficios = [
+    {
+      icon: "🧘‍♀️",
+      title: "Reducción del Estrés",
+      desc: "Calma tu mente y cuerpo a través de la meditación guiada.",
+    },
+    {
+      icon: "💖",
+      title: "Bienestar Físico",
+      desc: "Fortalece tu cuerpo con posturas suaves y desafiantes.",
+    },
+    {
+      icon: "🌿",
+      title: "Armonía Interior",
+      desc: "Conecta con tu esencia a través del yoga holístico.",
+    },
   ];
 
   const testimonios = [
-    { text: 'Gracias a Juan Vida, encontré la paz interior.', name: 'Ana López', photo: testimonio1 },
-    { text: 'Las clases de yoga transformaron mi bienestar.', name: 'Carlos Gómez', photo: testimonio2 },
-    { text: 'El enfoque personalizado hizo toda la diferencia.', name: 'Marta Ruiz', photo: testimonio3 },
-    { text: 'Nunca me había sentido tan conectada conmigo misma.', name: 'Sofía Martínez', photo: testimonio4 },
+    { text: 'Las clases son increibles, me ayudan a conectar.', name: 'Isabela Gómez ', photo: testimonio1 },
+    { text: 'En la meditación encuentro paz y creatividad para mis proyectos de manera conciente', name: 'Leonardo Martinez', photo: testimonio2 },
+    { text: 'Me siento muy orgullosa de mi hijo, me ayuda a mejorar mi salud, fortalecer mi cuerpo, a compartir y sentirme tranquila.', name: 'Blanca Velasquez', photo: testimonio3 }
   ];
 
   const aliados = [aliado1, aliado2, aliado3, aliado4];
+
+  const elementos = [
+    { icon: <FaFire />, title: "Fuego", desc: "Conecta con tu energía interior." },
+    { icon: <FaWater />, title: "Agua", desc: "Fluye con calma y armonía." },
+    { icon: <FaWind />, title: "Aire", desc: "Respira y libérate de tensiones." },
+    { icon: <FaLeaf />, title: "Tierra", desc: "Encuentra estabilidad y equilibrio." },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Lógica de auto-play para pantallas móviles
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const interval = isMobile ? setInterval(() => nextSlide(), 5000) : null;
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % elementos.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + elementos.length) % elementos.length);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -81,56 +123,109 @@ export default function App() {
 
       {/* Sección de los 4 Elementos */}
       <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Los 4 Elementos</h2>
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-          {[
-            { icon: <FaFire />, title: 'Fuego', desc: 'Conecta con tu energía interior.' },
-            { icon: <FaWater />, title: 'Agua', desc: 'Fluye con calma y armonía.' },
-            { icon: <FaWind />, title: 'Aire', desc: 'Respira y libérate de tensiones.' },
-            { icon: <FaLeaf />, title: 'Tierra', desc: 'Encuentra estabilidad y equilibrio.' },
-          ].map((element, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
-              <div className="bg-green-600 text-white text-4xl p-4 rounded-full">
-                {element.icon}
-              </div>
-              <h3 className="mt-4 text-xl font-bold">{element.title}</h3>
-              <p className="text-gray-700">{element.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+        <div className="container mx-auto px-4">
 
-      {/* Ishka Kankueb Yoga Section */}
-      <section className="py-20 bg-gradient-to-r text-black">
-        <div className="container mx-auto px-4 lg:flex lg:items-center">
+          {/* Vista móvil: Carrusel */}
+          <div className="block md:hidden relative">
+            <div
+              className="flex transition-transform duration-500"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {elementos.map((element, index) => (
+                <div
+                  key={index}
+                  className="min-w-full flex flex-col items-center text-center"
+                >
+                  <div className="bg-green-600 text-white text-4xl p-4 rounded-full">
+                    {element.icon}
+                  </div>
+                  <h3 className="mt-4 text-xl font-bold">{element.title}</h3>
+                  <p className="text-gray-700">{element.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Botones de navegación */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray text-white p-2 rounded-full"
+            >
+              &#8249;
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray text-white p-2 rounded-full"
+            >
+              &#8250;
+            </button>
+          </div>
+
+          {/* Indicadores */}
+          <div className="md:hidden flex justify-center mt-4">
+            {elementos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 mx-1 rounded-full ${index === currentIndex ? "bg-green-600" : "bg-gray-300"
+                  }`}
+              ></button>
+            ))}
+          </div>
+
+          {/* Vista escritorio: Diseño estático */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {elementos.map((element, index) => (
+              <div key={index} className="flex flex-col items-center text-center">
+                <div className="bg-green-600 text-white text-4xl p-4 rounded-full">
+                  {element.icon}
+                </div>
+                <h3 className="mt-4 text-xl font-bold">{element.title}</h3>
+                <p className="text-gray-700">{element.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-r from-gray-50 via-green-50 to-gray-50">
+        <div className="container mx-auto px-6 lg:flex lg:items-center">
           {/* Text Content */}
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold mb-8">Exploramos Ishka Kankueb Yoga</h2>
-            <p className="text-lg mb-6">
-              En Juan Vida nos sumergimos en el arte de <span className="text-green-300 font-bold">Ishka Kankueb Yoga</span>,
-              una práctica única que equilibra cuerpo, mente y espíritu a través de movimientos fluidos y conscientes.
-              Diseñamos experiencias personalizadas para transformar tu bienestar integral.
+            <h2 className="text-4xl font-extrabold text-gray-900 leading-tight mb-8">
+              Exploramos <span className="text-green-600">Ishka Kankueb Yoga</span>
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-10">
+              En Juan Vida nos sumergimos en el arte de{" "}
+              <span className="text-green-600 font-semibold">
+                Ishka Kankueb Yoga
+              </span>
+              , una práctica única que equilibra cuerpo, mente y espíritu a través de
+              movimientos fluidos y conscientes. Diseñamos experiencias personalizadas
+              para transformar tu bienestar integral.
             </p>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="space-y-8">
               {[
                 {
-                  title: 'Conexión Interior',
-                  desc: 'Fomentamos la conexión profunda con tu ser a través de técnicas de respiración y meditación.'
+                  title: "Conexión Interior",
+                  desc: "Fomentamos la conexión profunda con tu ser a través de técnicas de respiración y meditación.",
                 },
                 {
-                  title: 'Movimientos Armónicos',
-                  desc: 'Integramos posturas y secuencias que promueven flexibilidad y fuerza en equilibrio.'
+                  title: "Movimientos Armónicos",
+                  desc: "Integramos posturas y secuencias que promueven flexibilidad y fuerza en equilibrio.",
                 },
                 {
-                  title: 'Entorno Natural',
-                  desc: 'Disfruta de prácticas en espacios naturales diseñados para potenciar la serenidad y la paz.'
+                  title: "Entorno Natural",
+                  desc: "Disfruta de prácticas en espacios naturales diseñados para potenciar la serenidad y la paz.",
                 },
               ].map((feature, index) => (
-                <div key={index} className="p-6 bg-black bg-opacity-70 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
-                  <p className="text-white">{feature.desc}</p>
+                <div
+                  key={index}
+                  className="p-6 bg-green-100 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-700">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -141,43 +236,64 @@ export default function App() {
             <img
               src="iky.jpg" // Reemplaza con la ruta real de la imagen principal
               alt="Ishka Kankueb Yoga"
-              className="rounded-lg shadow-xl h-130 w-full"
+              className="rounded-xl shadow-lg w-full object-cover h-[600px]"
             />
             <img
               src="JV.png" // Reemplaza con la ruta real de la imagen secundaria (pequeña)
               alt="Ishka Yoga Logo"
-              className="absolute bottom-4 right-4 w-20 h-20 rounded-full border-4 border-white shadow-lg"
+              className="absolute bottom-4 right-4 w-24 h-24 rounded-full border-4 border-white shadow-md"
             />
           </div>
         </div>
       </section>
 
-      {/* Nuestros Aliados Section */}
       <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Nuestros Aliados</h2>
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
+            Nuestros Aliados
+          </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {aliados.map((logo, index) => (
-              <div key={index} className="flex items-center justify-center bg-white shadow-md rounded-lg p-4">
-                <img src={logo} alt={`Aliado ${index + 1}`} className="h-20 w-auto" />
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center bg-white shadow-md rounded-lg p-6 min-h-[200px]"
+              >
+                <img
+                  src={logo}
+                  alt={`Aliados`}
+                  className="h-30 w-auto  mb-4"
+                />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Blog Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Nuestro Blog</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
+            Beneficios del Yoga
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3">
             {blogPosts.map((post, index) => (
-              <div key={index} className="relative shadow-md rounded-lg overflow-hidden">
-                <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <Link to={post.link} className="text-yellow-400 text-lg font-bold">
-                    Leer Más
-                  </Link>
+              <div
+                key={index}
+                className="relative shadow-lg rounded-lg overflow-hidden group"
+              >
+                {/* Imagen del Blog */}
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform"
+                />
+
+                {/* Información del beneficio al hacer hover */}
+                <div className="absolute inset-0 bg-green-900 bg-opacity-90 flex flex-col items-center justify-center text-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-white text-green-900 text-4xl p-4 rounded-full mb-4">
+                    {beneficios[index].icon}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{beneficios[index].title}</h3>
+                  <p className="text-center text-sm">{beneficios[index].desc}</p>
                 </div>
               </div>
             ))}
@@ -185,20 +301,65 @@ export default function App() {
         </div>
       </section>
 
-      {/* Beneficios Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-900 mb-8">Beneficios de Practicar Yoga</h2>
-          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-            {[{ icon: '🧘‍♀️', title: 'Reducción del Estrés', desc: 'Calma tu mente y cuerpo a través de la meditación guiada.' },
-            { icon: '💖', title: 'Bienestar Físico', desc: 'Fortalece tu cuerpo con posturas suaves y desafiantes.' },
-            { icon: '🌿', title: 'Armonía Interior', desc: 'Conecta con tu esencia a través del yoga holístico.' }].map((feature, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <div className="bg-green-600 text-white text-4xl p-4 rounded-full">{feature.icon}</div>
-                <h3 className="mt-4 text-xl font-bold">{feature.title}</h3>
-                <p className="text-gray-700">{feature.desc}</p>
-              </div>
-            ))}
+      <section className="py-20 bg-gradient-to-r bg-gray-100">
+        {/* Título principal */}
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-extrabold text-gray-900 leading-tight text-center mb-12">
+            El impacto del <span className="text-green-600">hielo en el bienestar</span>
+          </h2>
+        </div>
+
+        {/* Contenido de la sección con la imagen a la izquierda */}
+        <div className="container mx-auto px-6 lg:flex lg:items-center lg:space-x-12">
+          {/* Imagen a la izquierda */}
+          <div className="lg:w-1/2 relative">
+            <img
+              src="hielo.jpg"
+              alt="Terapia de Hielo"
+              className="rounded-xl shadow-lg w-full object-cover h-[600px]"
+            />
+            <img
+              src="JV.png"
+              alt="Método Wim Hof Logo"
+              className="absolute top-4 left-4 w-24 h-24 rounded-full border-4 border-white shadow-md"
+            />
+          </div>
+
+          {/* Contenido de texto a la derecha */}
+          <div className="lg:w-1/2 mt-12 lg:mt-0">
+            <p className="text-lg text-gray-700 leading-relaxed mb-10">
+              La terapia de hielo y el{" "}
+              <span className="text-green-600 font-semibold">método Wim Hof</span> son
+              herramientas revolucionarias para fortalecer tu cuerpo, mente y espíritu.
+              Experimenta una conexión profunda contigo mismo mientras mejoras tu salud y
+              bienestar general.
+            </p>
+            <div className="space-y-8">
+              {[
+                {
+                  title: "Mejora la Resiliencia Física",
+                  desc: "El frío extremo entrena tu sistema circulatorio, fortaleciendo tu capacidad para adaptarte a condiciones adversas.",
+                },
+                {
+                  title: "Reducción del Estrés",
+                  desc: "Las técnicas de respiración y exposición al frío ayudan a regular tu sistema nervioso, reduciendo la ansiedad.",
+                },
+                {
+                  title: "Recuperación Muscular",
+                  desc: "El frío reduce la inflamación y acelera la recuperación después del ejercicio intenso.",
+                },
+              ].map((benefit, index) => (
+                <div
+                  key={index}
+                  className="p-6 bg-green-100 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-700">{benefit.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -207,14 +368,16 @@ export default function App() {
       <section className="py-16 bg-gradient-to-r from-green-100 to-green-200 text-center">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-green-900 mb-8">Testimonios</h2>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-items-center p-8">
             {testimonios.map((testimonial, index) => (
               <div key={index} className="bg-white shadow-lg rounded-lg p-6">
-                <img
-                  src={testimonial.photo}
-                  alt={`Testimonio de ${testimonial.name}`}
-                  className="w-16 h-16 rounded-full mx-auto"
-                />
+                <div className="w-24 h-24 mx-auto overflow-hidden rounded-full">
+                  <img
+                    src={testimonial.photo}
+                    alt={`Testimonio de ${testimonial.name}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <p className="mt-4 italic text-gray-700">"{testimonial.text}"</p>
                 <p className="mt-4 font-bold text-green-900">- {testimonial.name}</p>
               </div>
