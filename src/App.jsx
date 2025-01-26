@@ -55,10 +55,10 @@ export default function App() {
   const aliados = [aliado1, aliado2, aliado3, aliado4];
 
   const elementos = [
-    { icon: <FaFire />, title: "Fuego", desc: "Conecta con tu energía interior." },
-    { icon: <FaWater />, title: "Agua", desc: "Fluye con calma y armonía." },
-    { icon: <FaWind />, title: "Aire", desc: "Respira y libérate de tensiones." },
-    { icon: <FaLeaf />, title: "Tierra", desc: "Encuentra estabilidad y equilibrio." },
+    { icon: <FaFire />, title: "Fuego", desc: "Clases para tu energía y vitalidad." },
+    { icon: <FaWater />, title: "Agua", desc: "Vidas en calma y armonía." },
+    { icon: <FaWind />, title: "Aire", desc: "Respira y conoce quienes somos."},
+    { icon: <FaLeaf />, title: "Tierra", desc: "Productos para tu bienestar. " },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -78,25 +78,61 @@ export default function App() {
     setCurrentIndex((prev) => (prev - 1 + elementos.length) % elementos.length);
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="bg-white shadow-md h-16 flex items-center px-4">
-        <Link to="/" className="flex items-center">
-          <img src={JV} alt="Juan Vida Yoga" className="h-12" />
-        </Link>
-        <nav className="ml-auto flex gap-4">
-          {['Inicio', 'Cursos', 'Eventos', 'Productos', 'Contacto'].map((item) => (
-            <Link
-              key={item}
-              to="#"
-              className="text-sm font-bold hover:text-green-500"
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-      </header>
+<header className="bg-white shadow-md h-16 flex items-center px-4">
+      {/* Logo */}
+      <Link to="/" className="flex items-center">
+        <img src={JV} alt="Juan Vida Yoga" className="h-12" />
+      </Link>
+
+      {/* Hamburguesa */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="ml-auto lg:hidden block text-gray-600 focus:outline-none"
+      >
+        <svg
+          className="w-6 h-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      {/* Menú de Navegación */}
+      <nav
+        className={`lg:flex gap-4 ml-auto ${
+          isMenuOpen ? "block" : "hidden"
+        } absolute lg:static top-16 left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0`}
+      >
+        {[
+          "Clases",
+          "Eventos",
+          "Productos",
+          "Quienes somos",
+          "Contacto",
+        ].map((item) => (
+          <Link
+            key={item}
+            to="#"
+            className="text-sm font-bold hover:text-green-500 block lg:inline-block mb-2 lg:mb-0"
+          >
+            {item}
+          </Link>
+        ))}
+      </nav>
+    </header>
 
       {/* Hero Section */}
       <section
