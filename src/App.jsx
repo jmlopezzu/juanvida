@@ -47,7 +47,7 @@ export default function App() {
   ];
 
   const testimonios = [
-    { text: 'Las clases son increibles, me ayudan a conectar.', name: 'Isabela Gómez ', photo: testimonio1 },
+    { text: 'Las clases son increibles, me ayudan a conectar ... a veces, en el tiempo libre que tengo en la U Manizales me gusta participar.', name: 'Isabela Gómez ', photo: testimonio1 },
     { text: 'En la meditación encuentro paz y creatividad para mis proyectos de manera conciente', name: 'Leonardo Martinez', photo: testimonio2 },
     { text: 'Me siento muy orgullosa de mi hijo, me ayuda a mejorar mi salud, fortalecer mi cuerpo, a compartir y sentirme tranquila.', name: 'Blanca Velasquez', photo: testimonio3 }
   ];
