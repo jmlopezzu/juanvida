@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 import JV from '@/assets/JV.png';
 import testimonio1 from '@/assets/testimonio1.jpg';
 import testimonio2 from '@/assets/testimonio2.jpg';
@@ -57,7 +58,7 @@ export default function App() {
   const elementos = [
     { icon: <FaFire />, title: "Fuego", desc: "Clases para tu energía y vitalidad." },
     { icon: <FaWater />, title: "Agua", desc: "Vidas en calma y armonía." },
-    { icon: <FaWind />, title: "Aire", desc: "Respira y conoce quienes somos."},
+    { icon: <FaWind />, title: "Aire", desc: "Respira y conoce quienes somos." },
     { icon: <FaLeaf />, title: "Tierra", desc: "Productos para tu bienestar. " },
   ];
 
@@ -83,56 +84,79 @@ export default function App() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-<header className="bg-white shadow-md h-16 flex items-center px-4">
-      {/* Logo */}
-      <Link to="/" className="flex items-center">
-        <img src={JV} alt="Juan Vida Yoga" className="h-12" />
-      </Link>
+      <header className="bg-black text-white shadow-md h-12 flex items-end justify-between px-4">
 
-      {/* Hamburguesa */}
-      <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="ml-auto lg:hidden block text-gray-600 focus:outline-none"
-      >
-        <svg
-          className="w-6 h-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      {/* Contact Information */}
+      <div className="flex items-center space-x-6 ml-auto">
+        <span className="flex items-center text-sm">
+          <Phone className="h-4 w-4 mr-1" /> +57 3204997492
+        </span>
+        <span className="flex items-center text-sm">
+          <MapPin className="h-4 w-4 mr-1" /> Manizales, Colombia
+        </span>
+
+        {/* Instagram Logo */}
+        <a
+          href="https://instagram.com/juanvida222"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-gray-400"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-
-      {/* Menú de Navegación */}
-      <nav
-        className={`lg:flex gap-4 ml-auto ${
-          isMenuOpen ? "block" : "hidden"
-        } absolute lg:static top-16 left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0`}
-      >
-        {[
-          "Clases",
-          "Eventos",
-          "Productos",
-          "Quienes somos",
-          "Contacto",
-        ].map((item) => (
-          <Link
-            key={item}
-            to="#"
-            className="text-sm font-bold hover:text-green-500 block lg:inline-block mb-2 lg:mb-0"
-          >
-            {item}
-          </Link>
-        ))}
-      </nav>
+          <Instagram className="h-5 w-5" /> 
+        </a>
+      </div>
     </header>
+
+      <header className="bg-white shadow-md h-16 flex items-center px-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img src={JV} alt="Juan Vida Yoga" className="h-12" />
+        </Link>
+
+        {/* Botón hamburguesa */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="ml-auto lg:hidden block text-gray-600 focus:outline-none"
+        >
+          <svg
+            className="w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
+        {/* Menú de navegación */}
+        <nav
+          className={`lg:flex gap-4 ml-auto ${isMenuOpen ? "block" : "hidden"
+            } absolute lg:static top-16 right-4 bg-white shadow-lg rounded-md lg:shadow-none lg:bg-transparent p-4 lg:p-0`}
+          style={{ width: "max-content" }} // Tamaño dinámico
+        >
+          {[
+            "Clases",
+            "Eventos",
+            "Productos",
+            "Quienes somos",
+            "Contacto",
+          ].map((item) => (
+            <Link
+              key={item}
+              to="#"
+              className="text-sm font-bold hover:text-green-500 block lg:inline-block mb-2 lg:mb-0"
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
+      </header>
 
       {/* Hero Section */}
       <section
