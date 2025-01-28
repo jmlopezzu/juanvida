@@ -7,7 +7,7 @@ function Routes() {
     return (
         <ReactRoutes>
             <Route path="/" element={<Home />} />
-            <Route path="/antares" element={<Antares/>} />
+            <Route path="/blog" element={<Antares/>} />
         </ReactRoutes>
     );
 }
