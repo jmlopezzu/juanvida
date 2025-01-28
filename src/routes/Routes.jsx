@@ -1,12 +1,11 @@
 import React from 'react';
 import { Route, Routes as ReactRoutes } from 'react-router-dom';
-import Home from '../pages/Home';
 import Antares from '../pages/Antares';
 
 function Routes() {
     return (
         <ReactRoutes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Antares />} />
             <Route path="/antares" element={<Antares/>} />
         </ReactRoutes>
     );
