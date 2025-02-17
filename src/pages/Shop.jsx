@@ -48,7 +48,7 @@ const products = [
     {
         id: 6,
         name: "Sesiones en la U Manizales",
-        desc: "Una mente en paz se nutre de conocimiento, acercate al salón de yoga, con horarios flexibles y un ambiente relajado.",
+        desc: "Una mente en paz se nutre de conocimiento facilmente, acercate al salón de yoga, con horarios flexibles y un ambiente relajado.",
         price: 25000,
         sessions: 1,
         images: ["um.jpeg"]
