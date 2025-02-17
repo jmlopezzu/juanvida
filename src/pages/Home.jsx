@@ -169,7 +169,7 @@ export default function App() {
             >
                 <div className="container mx-auto px-4">
                     <h1 className="text-4xl font-bold mb-4">Encuentra paz en cada respiración</h1>
-                    <p className="text-lg mb-6">Descubre la armonía interior con nuestros cursos de yoga personalizados.</p>
+                    <p className="text-lg mb-6">Descubre la armonía interior con nuestros cursos de yoga personalizados</p>
                     <div className="flex justify-center gap-4">
                         {[
                         { name: "Clases", link: "#clases" },
