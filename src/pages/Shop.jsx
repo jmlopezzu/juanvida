@@ -44,6 +44,14 @@ const products = [
         price: 200000,
         sessions: 10, // 8 yoga + 2 inmersión en hielo
         images: ["hielo.jpg", "agua.jpeg", "hieloo.jpeg", "hielo.jpeg"]
+    },
+    {
+        id: 6,
+        name: "Sesiones en la U Manizales",
+        desc: "Una mente en paz se nutre de conocimiento, acercate al salón de yoga, con horarios flexibles y un ambiente relajado.",
+        price: 25000,
+        sessions: 1,
+        images: ["um.jpeg"]
     }
 ];
 
