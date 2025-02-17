@@ -30,7 +30,7 @@ const products = [
         images: ["grrrr.jpeg", "gruo.jpeg", "grups.jpeg", "grp.jpeg"]
     },
     {
-        id: 3,
+        id: 4,
         name: "Una Sesion Grupal",
         desc: "Un momento perfecto para conectar contigo mismo y compartir en grupo los miércoles o sábados.",
         price: 25000,
@@ -38,7 +38,7 @@ const products = [
         images: ["juan.jpeg", "hermandad.jpeg","hot.jpeg", "iky.jpg"]
     },
     {
-        id: 4,
+        id: 5,
         name: "Sesiones Grupales + Inmersión en Hielo",
         desc: "Mejora tu bienestar con yoga en grupo y sesiones de inmersión en hielo para fortalecer tu cuerpo y mente.",
         price: 200000,
