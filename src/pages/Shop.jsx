@@ -7,10 +7,10 @@ import { ShoppingCart } from 'lucide-react';
 const products = [
     {
         id: 1,
-        name: "Clases de Yoga Personalizadas",
+        name: "Clase de Yoga Personalizada",
         desc: "Sesiones exclusivas de yoga diseñadas para ti. Aprende y crece a tu ritmo con un instructor dedicado.",
         price: 120000,
-        sessions: 2,
+        sessions: 1,
         images: ["juanch.jpeg", "equi.jpeg", "nature.jpeg", "manos.jpeg",]
     },
     {
