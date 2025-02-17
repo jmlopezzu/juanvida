@@ -1,13 +1,13 @@
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Route, Routes as ReactRoutes } from 'react-router-dom';
-import Home from '../pages/Home';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div>
       <ReactRoutes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={ <Home /> } />
       </ReactRoutes>
       {/* Botón flotante de WhatsApp */}
       <a
