@@ -162,7 +162,7 @@ export default function App() {
             <section
                 className="w-full h-full py-60 text-white text-center bg-cover bg-center"
                 style={{
-                    backgroundImage: `url('jvy.jpeg')`,
+                    backgroundImage: `url('jvy.webp')`,
                     backgroundBlendMode: 'overlay',
                     backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 }}
